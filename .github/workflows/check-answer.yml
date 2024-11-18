@@ -1,0 +1,19 @@
+name: Check Answer
+
+on:
+  push:
+    branches: [main] # Adjust the branch name as needed
+
+jobs:
+  check-answer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check Answer
+        run: |
+          cat ans.txt | grep -q "HELLO WORLD"
+          if [ $? -eq 0 ]; then
+            echo "Correct answer! Level passed."
+          else
+            echo "Incorrect answer. Please try again."
+            exit 1
